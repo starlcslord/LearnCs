@@ -185,55 +185,9 @@
 <p>进入etc-&gt;进入bashrc-&gt;修改path</p>
 <p>export PATH=/usr/local/arm/4.4.3/bin</p>
 <p>export PATH</p>
-<p>成功之后运行arm-linux-gcc -v</p>
-<p>出现</p>
-<p>Using built-in specs.<br>Target: arm-none-linux-gnueabi<br>Configured with: /opt/FriendlyARM/mini2440/build-toolschain/working/src/gcc-4.4.3/configure –build=i386-build_redhat-linux-gnu –host=i386-build_redhat-linux-gnu –target=arm-none-linux-gnueabi –prefix=/opt/FriendlyARM/toolschain/4.4.3 –with-sysroot=/opt/FriendlyARM/toolschain/4.4.3/arm-none-linux-gnueabi//sys-root –enable-languages=c,c++ –disable-multilib –with-arch=armv4t –with-cpu=arm920t –with-tune=arm920t –with-float=soft –with-pkgversion=ctng-1.6.1 –disable-sjlj-exceptions –enable-__cxa_atexit –with-gmp=/opt/FriendlyARM/toolschain/4.4.3 –with-mpfr=/opt/FriendlyARM/toolschain/4.4.3 –with-ppl=/opt/FriendlyARM/toolschain/4.4.3 –with-cloog=/opt/FriendlyARM/toolschain/4.4.3 –with-mpc=/opt/FriendlyARM/toolschain/4.4.3 –with-local-prefix=/opt/FriendlyARM/toolschain/4.4.3/arm-none-linux-gnueabi//sys-root –disable-nls –enable-threads=posix –enable-symvers=gnu –enable-c99 –enable-long-long –enable-target-optspace<br>Thread model: posix<br>gcc version 4.4.3 (ctng-1.6.1) </p>
-<p>运行编译arm-linux-gcc  -o 编译出来的文件(目标文件)  源文件</p>
-<p>例子 arm-linux-gcc -o helloarm helloworld.c</p>
-<p>出现错误</p>
-<p>/usr/local/arm/4.4.3/bin/../libexec/gcc/arm-none-linux-gnueabi/4.4.3/cc1: error while loading shared libraries: libstdc++.so.6: cannot open shared object file: No such file or directory</p>
-<p>应为ubantu为64位系统 所以还需打so.6补丁</p>
-<p>sudo apt-get install lib32stdc++6</p>
-<p>再次运行命令行arm-linux-gcc -o helloarm helloworld.c</p>
-<p>出现一个文件叫做helloarm文件</p>
-<p>file命令查看文件属性</p>
-<p>helloarm: ELF 32-bit LSB executable, ARM, EABI5 version 1 (SYSV), dynamically linked, interpreter /lib/ld-linux.so.3, for GNU/Linux 2.6.32, not stripped                      //arm架构</p>
-<p>file hello<br>hello: ELF 64-bit LSB shared object, x86-64, version 1 (SYSV), dynamically linked, interpreter /lib64/ld-linux-x86-64.so.2, for GNU/Linux 3.2.0, BuildID[sha1]=b33627d1c43ca6ee88070598a246cb9f680f4d02, not stripped         //x86架构</p>
-<p>shell编程</p>
-<p>shell文件第一行 #! /bin/bash</p>
-<p>echo “helloworld”</p>
-<p>n=li</p>
-<p>echo “name is $n”</p>
-<p>双引号是将li输出</p>
-<p>单引号是将$n输出</p>
-<p>倒引号是将里面的字符都输出来</p>
-<p>makefile文件内容</p>
-<p>m:main.o func1.o func2.o<br>    gcc main.o func1.o func2.o -o m<br>main.o:main.c func1.h func2.h<br>    gcc -c main.c func1.h func2.h<br>func1.o:func2.c<br>    gcc -c func2.c<br>func1.o:func1.c<br>    gcc -c func1.c </p>
-<p>clean:<br>    rm *.o</p>
-<p>func1.c 文件内容</p>
-<p>void func1()<br>{<br>int sum=0,i;<br>for(i=1;i&lt;6;i++)<br>{<br>sum+=i;<br>}<br>printf(“相加sum=%d\n”,sum);<br>}</p>
-<p>func1.h文件内容</p>
-<p>void func1();</p>
-<p>func2.c文件内容</p>
-<p>void func2()<br>{<br>int sum=1,i;<br>for(i=1;i&lt;6;i++)<br>{<br>sum*=i;<br>}<br>printf(“相乘sum=%d\n”,sum);<br>}</p>
-<p>func2.h</p>
-<p>void func2();</p>
-<p>Ubantu18.04LTS的makefile功能需要下载</p>
-<p>使用make命令后就完成编译和链接了</p>
-<p>clean无法直接执行，需要手动使用 make clean命令</p>
-<p>缓冲 标准I/O操作的文件</p>
-<p>#include&lt;stdio.h&gt;<br>#include&lt;stdlib.h&gt;<br>#include&lt;fcntl.h&gt;<br>void main()<br>{<br>FILE *fd;<br>char buf[20];<br>buf[20]=NULL;<br>fd=fopen(“1.txt”,”rb”);<br>if(fd!=NULL)<br>{<br>fread(buf,1,20,fd);<br>printf(“读到的文件:%s”,buf);<br>}<br>if(fd==NULL)<br>{<br>return;<br>}<br>fclose(fd);<br>}</p>
-<p>1.txt hello world!</p>
-<p>非缓冲 系统文件操作</p>
-<p>#include&lt;stdio.h&gt;<br>#include&lt;stdlib.h&gt;<br>#include&lt;fcntl.h&gt;<br>void main()<br>{<br>int fd;<br>char buf[10];<br>buf[10]=NULL;<br>fd=open(“1.txt”,O_RDONLY,666);<br>if(fd&gt;0)<br>{<br>read(fd,buf,50);<br>printf(“读到的文件:%s”,buf);<br>}<br>if(fd&lt;0)<br>{<br>return;<br>}<br>close(fd);<br>}</p>
-<p>多进程运行</p>
-<p>#include&lt;pthread.h&gt;<br>#include&lt;unistd.h&gt;<br>#include&lt;stdio.h&gt;<br>void *thread(void *str)<br>{<br>int i;<br>for(i=1;i&lt;51;i++)<br>{<br>sleep(1);<br>printf(“this is the thread :%d\n”,i);<br>}<br>return NULL;<br>}<br>int main()<br>{<br>pthread_t pth;<br>int i;<br>int ret;<br>ret=pthread_create(&amp;pth,NULL,thread,(void *)(i));<br>printf(“Test Start”);<br>for(i=1;i&lt;51;i++)<br>{<br>sleep(1);<br>printf(“                                 this is the main:%d\n”,i);<br>}<br>pthread_join(pth,NULL);<br>return 0;<br>}</p>
-<p>文件复制</p>
-<p>#include&lt;stdio.h&gt;<br>#include&lt;stdlib.h&gt;<br>#define BUFFER_SIZE 1024<br>int main(int argc,char ** argv)<br>{<br>FILE *fileFrom;<br>FILE *fileTo;<br>char buffer[BUFFER_SIZE]={0};<br>int length=0;<br>if(argc!=3)<br>{<br>printf(“Usage:%s fileFrom flieTo\n”,argv[0]);<br>exit(0);<br>}<br>fileFrom=fopen(argv[1],”rb+”);s<br>if(fileFrom==NULL)<br>{<br>printf(“Open File %s Failed \n”,argv[1]);<br>exit(0);<br>}<br>fileTo=fopen(argv[2],”wb+”);<br>if(fileTo==NULL)<br>{<br>printf(“Open File %s Failed\n”,argv[2]);<br>exit(0);<br>}<br>while((length=fread(buffer,1,BUFFER_SIZE,fileFrom))&gt;0)<br>{<br>fwrite(buffer,1,length,fileTo);<br>}<br>fclose(fileFrom);<br>fclose(fileTo);<br>return 0;<br>}</p>
-<p>gcc file_copy.c -o file_copy</p>
-<p>./file_copy test.txt copy.txt</p>
-<p>test.txt 源文件 -&gt;copy.txt目标文件</p>
-
+        
+          <a class="article-more-a" href="/lcshtml.github.io/2020/12/19/%E5%B5%8C%E5%85%A5%E5%BC%8F/#more">more >></a>
+        
       
 
       
