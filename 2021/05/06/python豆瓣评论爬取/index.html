@@ -6,13 +6,17 @@
   <meta name="renderer" content="webkit">
   <meta http-equiv="X-UA-Compatible" content="IE=edge" >
   <link rel="dns-prefetch" href="https://github.com/starlcslord/LearnCs.github.io">
-  <title>Archives | Star</title>
+  <title>python豆瓣评论爬取 | Star</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta property="og:type" content="website">
-<meta property="og:title" content="Star">
-<meta property="og:url" content="https://github.com/starlcslord/LearnCs.github.io/archives/index.html">
+  <meta name="description" content="爬取豆瓣top250评论思路  第一步爬取一个电影的前七页评论，第二步爬取第一页25部电影的评论，第三步爬取十页共250个电影的评论">
+<meta property="og:type" content="article">
+<meta property="og:title" content="python豆瓣评论爬取">
+<meta property="og:url" content="https://github.com/starlcslord/LearnCs.github.io/2021/05/06/python%E8%B1%86%E7%93%A3%E8%AF%84%E8%AE%BA%E7%88%AC%E5%8F%96/index.html">
 <meta property="og:site_name" content="Star">
+<meta property="og:description" content="爬取豆瓣top250评论思路  第一步爬取一个电影的前七页评论，第二步爬取第一页25部电影的评论，第三步爬取十页共250个电影的评论">
 <meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2021-05-06T12:58:11.000Z">
+<meta property="article:modified_time" content="2021-05-06T13:05:13.833Z">
 <meta property="article:author" content="LCS">
 <meta name="twitter:card" content="summary">
   
@@ -150,167 +154,158 @@
             <canvas data-colors="#eaeaea" data-sectionHeight="100" data-contentId="js-content" id="myCanvas1" class="anm-canvas"></canvas>
           </div>
           <div id="js-content" class="content-ll">
-            
+            <article id="post-python豆瓣评论爬取" class="article article-type-post " itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
   
+    <h1 class="article-title" itemprop="name">
+      python豆瓣评论爬取
+    </h1>
   
-    
-    
-      
-      
-      <section class="archives-wrap">
-        <div class="archive-year-wrap">
-          <a href="/LearnCs.github.io/archives/2021" class="archive-year">2021</a>
-        </div>
-        <div class="archives">
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/LearnCs.github.io/2021/05/06/python%E8%B1%86%E7%93%A3%E8%AF%84%E8%AE%BA%E7%88%AC%E5%8F%96/" class="archive-article-date">
+
+        
+        <a href="/LearnCs.github.io/2021/05/06/python%E8%B1%86%E7%93%A3%E8%AF%84%E8%AE%BA%E7%88%AC%E5%8F%96/" class="archive-article-date">
   	<time datetime="2021-05-06T12:58:11.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2021-05-06</time>
 </a>
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/LearnCs.github.io/2021/05/06/python%E8%B1%86%E7%93%A3%E8%AF%84%E8%AE%BA%E7%88%AC%E5%8F%96/">python豆瓣评论爬取</a>
-    </h1>
-  
-
-        <div class="article-info info-on-right">
-          
-          
-
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
+        
+      </header>
     
-    
+    <div class="article-entry" itemprop="articleBody">
       
-        </div></section>
+        <h3 id="爬取豆瓣top250评论"><a href="#爬取豆瓣top250评论" class="headerlink" title="爬取豆瓣top250评论"></a>爬取豆瓣top250评论</h3><h5 id="思路-第一步爬取一个电影的前七页评论，第二步爬取第一页25部电影的评论，第三步爬取十页共250个电影的评论"><a href="#思路-第一步爬取一个电影的前七页评论，第二步爬取第一页25部电影的评论，第三步爬取十页共250个电影的评论" class="headerlink" title="思路  第一步爬取一个电影的前七页评论，第二步爬取第一页25部电影的评论，第三步爬取十页共250个电影的评论"></a>思路  第一步爬取一个电影的前七页评论，第二步爬取第一页25部电影的评论，第三步爬取十页共250个电影的评论</h5><a id="more"></a>
+
+<h3 id="代码"><a href="#代码" class="headerlink" title="代码"></a>代码</h3><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> urllib.request</span><br><span class="line"><span class="keyword">import</span> time</span><br><span class="line"><span class="keyword">import</span> jieba</span><br><span class="line"><span class="keyword">import</span> numpy <span class="keyword">as</span> np</span><br><span class="line"><span class="keyword">import</span> matplotlib.pyplot <span class="keyword">as</span> plt</span><br><span class="line"><span class="keyword">from</span> wordcloud <span class="keyword">import</span> WordCloud</span><br><span class="line"><span class="keyword">from</span> lxml <span class="keyword">import</span> etree</span><br><span class="line"><span class="keyword">import</span> re</span><br><span class="line"><span class="keyword">from</span> bs4 <span class="keyword">import</span> BeautifulSoup</span><br><span class="line"><span class="comment">#https://movie.douban.com/subject/1292052/comments?start=60&amp;limit=60&amp;status=P&amp;sort=new_score</span></span><br><span class="line">c=<span class="number">0</span></span><br><span class="line">i=c</span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">pl</span>(<span class="params">h</span>):</span></span><br><span class="line">    req=urllib.request.Request(h)</span><br><span class="line">    req.add_header(<span class="string">&#x27;User-Agent&#x27;</span>,<span class="string">&#x27;Mozilla/5.0 (Windows NT 10.0; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/79.0.3945.130 Safari/537.36&#x27;</span>)</span><br><span class="line">    r = urllib.request.urlopen(req)</span><br><span class="line">    txt=r.read()</span><br><span class="line">    selector=BeautifulSoup(txt,<span class="string">&quot;html.parser&quot;</span>)</span><br><span class="line">    <span class="keyword">for</span> i <span class="keyword">in</span> <span class="built_in">range</span>(<span class="number">20</span>):</span><br><span class="line">        wenben=selector.find_all(class_=re.<span class="built_in">compile</span>(<span class="string">&quot;short&quot;</span>))</span><br><span class="line">        t=wenben[i].text</span><br><span class="line">        print(<span class="built_in">type</span>(t))</span><br><span class="line">        list1=<span class="built_in">list</span>(<span class="built_in">range</span>(<span class="number">0</span>,<span class="number">20</span>))</span><br><span class="line">        list1[i]=<span class="built_in">str</span>(t)</span><br><span class="line">        f=<span class="built_in">open</span>(<span class="string">&#x27;comment.txt&#x27;</span>,<span class="string">&#x27;a+&#x27;</span>,encoding=<span class="string">&#x27;utf-8&#x27;</span>)</span><br><span class="line">        f.writelines(<span class="built_in">str</span>(i)+<span class="string">&quot;楼&quot;</span>+t+<span class="string">&quot;\n&quot;</span>)</span><br><span class="line">        print(t)</span><br><span class="line">        f.close()</span><br><span class="line">    time.sleep(<span class="number">20</span>)</span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">cy</span>():</span></span><br><span class="line">    excludes=&#123;<span class="string">&quot;10&quot;</span>,<span class="string">&quot;11&quot;</span>,<span class="string">&quot;12&quot;</span>,<span class="string">&quot;13&quot;</span>,<span class="string">&quot;14&quot;</span>,<span class="string">&quot;15&quot;</span>,<span class="string">&quot;16&quot;</span>,<span class="string">&quot;17&quot;</span>,<span class="string">&quot;18&quot;</span>,<span class="string">&quot;19&quot;</span>&#125;</span><br><span class="line">    txt=<span class="built_in">open</span>(<span class="string">&#x27;comment.txt&#x27;</span>,<span class="string">&#x27;r&#x27;</span>,encoding=<span class="string">&#x27;utf-8&#x27;</span>).read()</span><br><span class="line">    words=jieba.lcut(txt)</span><br><span class="line">    counts=&#123;&#125;</span><br><span class="line">    <span class="keyword">for</span> word <span class="keyword">in</span> words:</span><br><span class="line">        <span class="keyword">if</span> <span class="built_in">len</span>(word) == <span class="number">1</span>:</span><br><span class="line">            <span class="keyword">continue</span></span><br><span class="line">        <span class="keyword">else</span>:</span><br><span class="line">            counts[word]=counts.get(word,<span class="number">0</span>)+<span class="number">1</span></span><br><span class="line">    <span class="keyword">for</span> word <span class="keyword">in</span> excludes:</span><br><span class="line">        <span class="keyword">del</span>(counts[word])</span><br><span class="line">    items=<span class="built_in">list</span>(counts.items())</span><br><span class="line">    items.sort(key=<span class="keyword">lambda</span> x:x[<span class="number">1</span>],reverse=<span class="literal">True</span>)</span><br><span class="line">    <span class="keyword">for</span> g <span class="keyword">in</span> <span class="built_in">range</span>(<span class="number">50</span>):</span><br><span class="line">        word,count=items[g]</span><br><span class="line">        print(<span class="string">&quot;&#123;0:&lt;15&#125;&#123;1:&gt;5&#125;&quot;</span>.<span class="built_in">format</span>(word,count))</span><br><span class="line">    wc = WordCloud(background_color=<span class="string">&quot;white&quot;</span>, max_words=<span class="number">50</span>)</span><br><span class="line"><span class="comment"># generate word cloud</span></span><br><span class="line">    wc.generate_from_frequencies(counts)</span><br><span class="line"></span><br><span class="line">    <span class="comment"># show</span></span><br><span class="line">    plt.imshow(wc, interpolation=<span class="string">&quot;bilinear&quot;</span>)</span><br><span class="line">    plt.axis(<span class="string">&quot;off&quot;</span>)</span><br><span class="line">    plt.show()</span><br><span class="line">d=<span class="number">0</span></span><br><span class="line">s=<span class="number">6</span></span><br><span class="line"><span class="keyword">while</span> s&lt;<span class="number">10</span>:</span><br><span class="line">    req1=<span class="string">&quot;https://movie.douban.com/top250?start=&quot;</span></span><br><span class="line">    d = <span class="number">0</span></span><br><span class="line">    req2=s*<span class="number">25</span></span><br><span class="line">    req3=<span class="string">&quot;&amp;filter=&quot;</span></span><br><span class="line">    pageurl=req1+<span class="built_in">str</span>(req2)+req3</span><br><span class="line">    req=urllib.request.Request(pageurl)</span><br><span class="line">    req.add_header(<span class="string">&#x27;User-Agent&#x27;</span>,<span class="string">&#x27;Mozilla/5.0 (Windows NT 10.0; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/79.0.3945.130 Safari/537.36&#x27;</span>)</span><br><span class="line">    r = urllib.request.urlopen(req)</span><br><span class="line">    txt = r.read()</span><br><span class="line">    soup=BeautifulSoup(txt,<span class="string">&#x27;html.parser&#x27;</span>)</span><br><span class="line">    s += <span class="number">1</span></span><br><span class="line">    print(pageurl)</span><br><span class="line"><span class="comment">#soup=soup.find_all(&quot;a&quot;)</span></span><br><span class="line"><span class="comment">#print((soup.find(href=re.compile(&quot;subject&quot;))).attrs)</span></span><br><span class="line">    x=(soup.find_all(href=re.<span class="built_in">compile</span>(<span class="string">&quot;subject&quot;</span>)))</span><br><span class="line">    <span class="keyword">while</span> d&lt;<span class="number">50</span>:</span><br><span class="line">        a=x[d].attrs[<span class="string">&#x27;href&#x27;</span>]</span><br><span class="line">        d += <span class="number">2</span></span><br><span class="line">        print(a)</span><br><span class="line">        print(a[<span class="number">33</span>:-<span class="number">1</span>])</span><br><span class="line">        a=a[<span class="number">33</span>:-<span class="number">1</span>]</span><br><span class="line">        <span class="keyword">for</span> i <span class="keyword">in</span> <span class="built_in">range</span>(<span class="number">0</span>,<span class="number">7</span>):</span><br><span class="line">            <span class="keyword">if</span> i==<span class="number">0</span>:</span><br><span class="line">                qurl=<span class="string">&#x27;https://movie.douban.com/subject/&#x27;</span></span><br><span class="line">                zurl=a</span><br><span class="line">                hurl=<span class="string">&#x27;/comments?sort=new_score&amp;status=P&#x27;</span></span><br><span class="line">                req=qurl+zurl+hurl</span><br><span class="line">                pl(req)</span><br><span class="line">            <span class="keyword">if</span> i&gt;<span class="number">0</span>:</span><br><span class="line">                qurl=<span class="string">&#x27;https://movie.douban.com/subject/&#x27;</span></span><br><span class="line">                zurl1=a</span><br><span class="line">                zurl2=<span class="string">&#x27;/comments?start=&#x27;</span></span><br><span class="line">                zurl3=<span class="built_in">str</span>(i*<span class="number">20</span>)</span><br><span class="line">                hurl=<span class="string">&#x27;&amp;limit=20&amp;status=P&amp;sort=new_score&#x27;</span></span><br><span class="line">                url=qurl+zurl1+zurl2+zurl3+hurl</span><br><span class="line">                print(url)</span><br><span class="line">                pl(url)</span><br><span class="line">cy()</span><br></pre></td></tr></table></figure>
+
+      
+
+      
+        <div class="page-reward">
+          <a href="javascript:;" class="page-reward-btn tooltip-top">
+            <div class="tooltip tooltip-east">
+            <span class="tooltip-item">
+              赏
+            </span>
+            <span class="tooltip-content">
+              <span class="tooltip-text">
+                <span class="tooltip-inner">
+                  <p class="reward-p"><i class="icon icon-quo-left"></i>谢谢你请我吃糖果<i class="icon icon-quo-right"></i></p>
+                  <div class="reward-box">
+                    
+                    
+                  </div>
+                </span>
+              </span>
+            </span>
+          </div>
+          </a>
+        </div>
+      
+    </div>
+    <div class="article-info article-info-index">
       
       
-      <section class="archives-wrap">
-        <div class="archive-year-wrap">
-          <a href="/LearnCs.github.io/archives/2020" class="archive-year">2020</a>
-        </div>
-        <div class="archives">
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/LearnCs.github.io/2020/12/21/Springboot%E5%92%8CMaven%E7%8E%AF%E5%A2%83%E6%90%AD%E5%BB%BA/" class="archive-article-date">
-  	<time datetime="2020-12-21T10:22:35.591Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2020-12-21</time>
-</a>
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/LearnCs.github.io/2020/12/21/Springboot%E5%92%8CMaven%E7%8E%AF%E5%A2%83%E6%90%AD%E5%BB%BA/">Springboot和Maven环境搭建</a>
-    </h1>
-  
+      
 
-        <div class="article-info info-on-right">
-          
-          
+      
 
+      
+        
+<div class="share-btn share-icons tooltip-left">
+  <div class="tooltip tooltip-east">
+    <span class="tooltip-item">
+      <a href="javascript:;" class="share-sns share-outer">
+        <i class="icon icon-share"></i>
+      </a>
+    </span>
+    <span class="tooltip-content">
+      <div class="share-wrap">
+        <div class="share-icons">
+          <a class="weibo share-sns" href="javascript:;" data-type="weibo">
+            <i class="icon icon-weibo"></i>
+          </a>
+          <a class="weixin share-sns wxFab" href="javascript:;" data-type="weixin">
+            <i class="icon icon-weixin"></i>
+          </a>
+          <a class="qq share-sns" href="javascript:;" data-type="qq">
+            <i class="icon icon-qq"></i>
+          </a>
+          <a class="douban share-sns" href="javascript:;" data-type="douban">
+            <i class="icon icon-douban"></i>
+          </a>
+          <a class="qzone share-sns" href="javascript:;" data-type="qzone">
+            <i class="icon icon-qzone"></i>
+          </a>
+          <a class="facebook share-sns" href="javascript:;" data-type="facebook">
+            <i class="icon icon-facebook"></i>
+          </a>
+          <a class="twitter share-sns" href="javascript:;" data-type="twitter">
+            <i class="icon icon-twitter"></i>
+          </a>
+          <a class="google share-sns" href="javascript:;" data-type="google">
+            <i class="icon icon-google"></i>
+          </a>
         </div>
-        <div class="clearfix"></div>
-    </header>
+      </div>
+    </span>
+  </div>
+</div>
+
+<div class="page-modal wx-share js-wx-box">
+    <a class="close js-modal-close" href="javascript:;"><i class="icon icon-close"></i></a>
+    <p>扫一扫，分享到微信</p>
+    <div class="wx-qrcode">
+      <img src="//pan.baidu.com/share/qrcode?url=https://github.com/starlcslord/LearnCs.github.io/2021/05/06/python%E8%B1%86%E7%93%A3%E8%AF%84%E8%AE%BA%E7%88%AC%E5%8F%96/" alt="微信分享二维码">
+    </div>
+</div>
+
+<div class="mask js-mask"></div>
+      
+      <div class="clearfix"></div>
+    </div>
   </div>
 </article>
+
   
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/LearnCs.github.io/2020/12/19/hexo%E6%94%BE%E5%85%A5%E5%8A%A8%E6%80%81%E5%B0%8F%E4%BA%BA/" class="archive-article-date">
-  	<time datetime="2020-12-19T11:26:07.122Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2020-12-19</time>
-</a>
+<nav id="article-nav">
+  
+  
+    <a href="/LearnCs.github.io/2020/12/21/Springboot%E5%92%8CMaven%E7%8E%AF%E5%A2%83%E6%90%AD%E5%BB%BA/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">Springboot和Maven环境搭建</div>
+      <i class="icon-circle-right"></i>
+    </a>
+  
+</nav>
+
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
         </div>
-    	 
+        
+        
+    </div>
+</aside>
+
+
+
   
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/LearnCs.github.io/2020/12/19/hexo%E6%94%BE%E5%85%A5%E5%8A%A8%E6%80%81%E5%B0%8F%E4%BA%BA/">hexo放入动态小人</a>
-    </h1>
+  
   
 
-        <div class="article-info info-on-right">
-          
-          
-
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/LearnCs.github.io/2020/12/19/hexo%E6%90%AD%E5%BB%BA%E9%9D%99%E6%80%81%E5%8D%9A%E5%AE%A2/" class="archive-article-date">
-  	<time datetime="2020-12-18T17:29:47.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2020-12-19</time>
-</a>
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/LearnCs.github.io/2020/12/19/hexo%E6%90%AD%E5%BB%BA%E9%9D%99%E6%80%81%E5%8D%9A%E5%AE%A2/">hexo搭建静态博客</a>
-    </h1>
   
 
-        <div class="article-info info-on-right">
-          
-          
-
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/LearnCs.github.io/2020/12/19/hello-world/" class="archive-article-date">
-  	<time datetime="2020-12-18T16:25:20.449Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2020-12-19</time>
-</a>
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/LearnCs.github.io/2020/12/19/hello-world/">Hello World</a>
-    </h1>
   
 
-        <div class="article-info info-on-right">
-          
-          
-
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
   
-  
-    </div></section>
-  
-
-    
 
 
           </div>
@@ -333,8 +328,8 @@
 	var yiliaConfig = {
 		mathjax: false,
 		isHome: false,
-		isPost: false,
-		isArchive: true,
+		isPost: true,
+		isArchive: false,
 		isTag: false,
 		isCategory: false,
 		open_in_new: false,
